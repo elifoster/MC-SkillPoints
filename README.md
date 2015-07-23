@@ -7,7 +7,7 @@ Shoutout to kingluke_ (bae) for helping me with ideas and names, and showing me 
 ## Skills
 Each skill (described below) has its own skill tree, and can level up with use. Higher skill levels allow for the enabling of different perks, but also (depending on the skill) can make the game more difficult. Any perk can be chosen when the player levels up in that skill, but some can only be chosen at certain levels. There is a level cap of 100. Some perks have their own perk prequesites that are required to have before they can be chosen. Each skill has the same amount of perks.
 
-When a player levels up, it will state in the chat "<user> has leveled up in the <skill> skill!" Stating this globally will be enabled by default, but disableable for large servers.
+When a player levels up, it will state in the chat "*user* has leveled up in the *skill* skill!" Stating this globally will be enabled by default, but disableable for large servers.
 
 More skills may be added. Perks and skills are subject to different names and values. Names are not my strongest suit.
 ### Skill: Melee Combat
@@ -20,7 +20,7 @@ The skill of fighting using axes and swords. Perks:
 
 ### Skill: Archery Combat
 The skill of fighting using bows and arrows. Perks:
-* Sharpshooter: Pressing <sharpshooter key> while an arrow is drawn will zoom in.
+* Sharpshooter: Pressing *sharpshooter key* while an arrow is drawn will zoom in.
 * Critical damage: 10% for critical damage of up to +4 points.
 * Hard arrows: Attacks do +7 more damage, but draw 15% slower.
 * Piercer: Attacks ignore 10% armor ratings.
