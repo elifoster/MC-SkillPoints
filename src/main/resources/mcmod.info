@@ -1,0 +1,16 @@
+[
+{
+  "modid": "skillpoints",
+  "name": "Skill Points",
+  "description": "A mod that adds a skill, level, and perk system to Minecraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SatanicSanta", "Strikingwolf"],
+  "credits": "SatanicSanta and Strikingwolf for development, kingluke_ for ideas and names",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
