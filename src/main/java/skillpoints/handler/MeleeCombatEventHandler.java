@@ -1,5 +1,5 @@
 package skillpoints.handler;
 
-public class SkillPointEventHandler {
+public class MeleeCombatEventHandler {
     //TODO
 }
