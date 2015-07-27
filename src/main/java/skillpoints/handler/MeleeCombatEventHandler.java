@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import skillpoints.skill.Skill;
+import skillpoints.skill.SkillsRef;
 
 public class MeleeCombatEventHandler {
     public float meleeXP = 0.0F;
@@ -12,6 +14,10 @@ public class MeleeCombatEventHandler {
     @SubscribeEvent
     public void onAttackWithWeapon(AttackEntityEvent event) {
 		EntityPlayer player = event.entityPlayer;
+
+		for (Skill<AttackEntityEvent> s : SkillsRef.getMelee()) {
+			s.doSkill(event);
+		}
 
 		boolean isHand = !player.isUsingItem();
 		boolean isSword = player.getHeldItem().getItem() instanceof ItemSword;
