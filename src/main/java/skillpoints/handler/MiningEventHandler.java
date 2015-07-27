@@ -2,7 +2,6 @@ package skillpoints.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 
 public class MiningEventHandler {
