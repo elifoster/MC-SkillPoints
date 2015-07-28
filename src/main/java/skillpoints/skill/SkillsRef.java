@@ -1,6 +1,7 @@
 package skillpoints.skill;
 
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import skillpoints.api.skill.Skill;
 import skillpoints.skill.melee.Strongarm;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package skillpoints.skill;
+package skillpoints.api.skill;
 
 import cpw.mods.fml.common.eventhandler.Event;
 

@@ -1,7 +1,7 @@
 package skillpoints.skill.melee;
 
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.skill.Skill;
+import skillpoints.api.skill.Skill;
 
 /**
  * @author Strikingwolf
