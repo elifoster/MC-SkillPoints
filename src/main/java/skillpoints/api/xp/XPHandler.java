@@ -17,6 +17,13 @@ public interface XPHandler {
 	public int xp(EntityPlayer player);
 
 	/**
+	 * Gets a player's level for this type
+	 * @param player player to get level of
+	 * @return level
+	 */
+	public int level(EntityPlayer player);
+
+	/**
 	 * Saves the XP of a player
 	 * @param player player to save the xp of
 	 */

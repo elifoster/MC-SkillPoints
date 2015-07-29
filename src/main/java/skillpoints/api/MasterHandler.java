@@ -90,7 +90,7 @@ public class MasterHandler {
 		HashMap<String, Integer> xp = new HashMap<String, Integer>();
 
 		for (XPHandler xpHandler : xpHandlers) {
-			xp.put(xpHandler.name(), xpHandler.xp(player));
+			xp.put(xpHandler.name(), xpHandler.level(player));
 		}
 
 		for (SkillHandler skillHandler : skillHandlers) {
@@ -108,6 +108,48 @@ public class MasterHandler {
 		}
 
 		return perks;
+	}
+
+	/**
+	 * Gets the new perks for a player given the xpHandler that was updated
+	 * @param player Player to get new perks for
+	 * @param xpHandler XPHandler that updated
+	 * @return Hash from Skill group to list of Perks gained
+	 */
+	public HashMap<String, List<Perk>> newPerks(EntityPlayer player, XPHandler xpHandler) {
+		HashMap<String, List<Perk>> perks = new HashMap<String, List<Perk>>();
+		String xpName = xpHandler.name();
+		int level = xpHandler.level(player);
+
+		for (SkillHandler skillHandler : skillHandlers) {
+			String name = skillHandler.name();
+
+			List<Perk> before = perks.get(name);
+			List<Perk> now = (List<Perk>) skillHandler.newPerks(xpName, level);
+
+			if (before == null) {
+				perks.put(name, now);
+			} else {
+				before.addAll(now);
+				perks.put(name, before);
+			}
+		}
+
+		return perks;
+	}
+
+	public void levelUp(EntityPlayer player, XPHandler xpHandler) {
+		// TODO add a config option for global or not
+		String toSend = player.getDisplayName() + " has leveled up in xp group " + xpHandler.name() + " and has earned the following perks";
+		HashMap<String, List<Perk>> theNewPerks = newPerks(player, xpHandler);
+		for (String name : theNewPerks.keySet()) {
+			List<Perk> perks = theNewPerks.get(name);
+			toSend += "\n" + name;
+			for (Perk perk : perks) {
+				toSend += "\n- " + perk.name();
+			}
+		}
+		// TODO actually send the toSend variable to the player
 	}
 
 	// TODO things?
