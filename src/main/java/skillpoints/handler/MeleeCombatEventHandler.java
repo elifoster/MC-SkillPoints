@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.skill.Skill;
+import skillpoints.api.skill.Perk;
 import skillpoints.skill.SkillsRef;
 
 public class MeleeCombatEventHandler {
@@ -15,7 +15,7 @@ public class MeleeCombatEventHandler {
     public void onAttackWithWeapon(AttackEntityEvent event) {
 		EntityPlayer player = event.entityPlayer;
 
-		for (Skill<AttackEntityEvent> s : SkillsRef.getMelee()) {
+		for (Perk<AttackEntityEvent> s : SkillsRef.getMelee()) {
 			s.doSkill(event);
 		}
 

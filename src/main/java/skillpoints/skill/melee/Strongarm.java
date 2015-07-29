@@ -1,12 +1,12 @@
 package skillpoints.skill.melee;
 
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.skill.Skill;
+import skillpoints.api.skill.Perk;
 
 /**
  * @author Strikingwolf
  */
-public class Strongarm implements Skill<AttackEntityEvent> {
+public class Strongarm implements Perk<AttackEntityEvent> {
 	@Override
 	public int expNeeded() {
 		// TODO, decide Exp amounts

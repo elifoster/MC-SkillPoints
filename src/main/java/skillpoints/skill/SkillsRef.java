@@ -1,7 +1,7 @@
 package skillpoints.skill;
 
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.skill.Skill;
+import skillpoints.api.skill.Perk;
 import skillpoints.skill.melee.Strongarm;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @author Strikingwolf
  */
 public class SkillsRef {
-	private static ArrayList<Skill<AttackEntityEvent>> melee = new ArrayList<Skill<AttackEntityEvent>>();
+	private static ArrayList<Perk<AttackEntityEvent>> melee = new ArrayList<Perk<AttackEntityEvent>>();
 
-	public static ArrayList<Skill<AttackEntityEvent>> getMelee() {
+	public static ArrayList<Perk<AttackEntityEvent>> getMelee() {
 		return melee;
 	}
 
