@@ -33,7 +33,7 @@ The skill of using a fishing rod to find fish in water. Perks:
 * Better bait: Higher chance of a fish biting.
 * 2 fish 1 rod: 10% chance of catching 2x as many fish.
   * 3 fish 1 rod: 10% chance of catching 3x as many fish. (High level)
-* Quick cast: Fishing rods cast faster, but it takes longer for fish to bite.
+* Quick cast: Fishing rods cast faster
 * Treasure fishing: Small chance of getting random enchanted items and valueable materials (requires 25 looting), lowers chance of catching fish.
 
 ### Skill: Mining
