@@ -4,11 +4,13 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import skillpoints.api.perks.Perk;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface SkillHandler<E extends Event> {
+
 	/**
 	 * Name of the skill
 	 * @return name
@@ -19,7 +21,7 @@ public interface SkillHandler<E extends Event> {
 	 * List of perks that go with this skill
 	 * @return List of Perks
 	 */
-	public List<Perk<E>> skills();
+	public List<Perk<E>> perks();
 
 	/**
 	 * EventBus that this SkillHandler runs off of

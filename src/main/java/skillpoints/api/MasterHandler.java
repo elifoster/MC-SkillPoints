@@ -1,7 +1,7 @@
 package skillpoints.api;
 
 import net.minecraft.entity.player.EntityPlayer;
-import skillpoints.api.skill.Perk;
+import skillpoints.api.perks.Perk;
 import skillpoints.api.skill.SkillHandler;
 import skillpoints.api.xp.XPHandler;
 
