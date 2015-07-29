@@ -30,6 +30,7 @@ public class SkillPointsMod {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new GlobalSkillsEventHandler());
         if (Config.enableMeleeSystem) {
             MinecraftForge.EVENT_BUS.register(new MeleeCombatEventHandler());
         }
