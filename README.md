@@ -1,7 +1,9 @@
 # MC-SkillPoints
-A Minecraft mod that adds a skill tree system to the game. This mod is very based off of my experiences playing Skyrim and Fallout. This mod is currently in its theoretical stage. It will add a very easy to use and fully-featured API for easy mod compatbility, as well as quick development of new features. 
+A Minecraft mod that adds a skill and perk system to the game. This mod is very based off of my experiences playing Skyrim and Fallout. This mod is currently in its theoretical stage. It will add a very easy to use and fully-featured API for easy mod compatbility, as well as quick development of new features. 
 
 Shoutout to kingluke_ (bae) for helping me with ideas and names, and showing me Skyrim and Fallout.
+
+When complete, wiki will be available at the FTB Official Wiki/Gamepedia, at whatever name we decide to go with.
 
 # About
 ## Skills
