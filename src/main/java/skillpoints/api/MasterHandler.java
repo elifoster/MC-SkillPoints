@@ -90,7 +90,7 @@ public class MasterHandler {
 		HashMap<String, Integer> xp = new HashMap<String, Integer>();
 
 		for (XPHandler xpHandler : xpHandlers) {
-			xp.put(xpHandler.name(), xpHandler.getXP(player));
+			xp.put(xpHandler.name(), xpHandler.xp(player));
 		}
 
 		for (SkillHandler skillHandler : skillHandlers) {

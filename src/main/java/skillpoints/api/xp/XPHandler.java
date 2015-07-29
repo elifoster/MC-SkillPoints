@@ -14,7 +14,7 @@ public interface XPHandler {
 	 * @param player player to get xp of
 	 * @return xp
 	 */
-	public int getXP(EntityPlayer player);
+	public int xp(EntityPlayer player);
 
 	/**
 	 * Saves the XP of a player
