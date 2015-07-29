@@ -7,7 +7,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 public class MeleeCombatEventHandler {
-    public float meleeXP = 0.0F;
 
     @SubscribeEvent
     public void onAttackWithWeapon(AttackEntityEvent event) {
@@ -19,6 +18,7 @@ public class MeleeCombatEventHandler {
 		boolean goodItem = isHand || isSword || isAxe;
 
 		if (goodItem) {
+			float meleeXP = player.getEntityData().getFloat("meleeXP");
 			if (event.entity.isEntityAlive()) {
 				if (isHand) {
 					meleeXP += 0.5F;
@@ -36,6 +36,8 @@ public class MeleeCombatEventHandler {
 					meleeXP += 1.5F;
 				}
 			}
+
+			player.getEntityData().setFloat("meleeXP", meleeXP);
 		}
     }
 }

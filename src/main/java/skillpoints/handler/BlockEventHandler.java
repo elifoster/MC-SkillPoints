@@ -6,15 +6,15 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class BlockEventHandler {
 
-    public float blockXP = 0.0F;
-
     @SubscribeEvent
     public void handleBlock(LivingAttackEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
+            float blockXP = player.getEntityData().getFloat("blockXP");
             if (player.isBlocking()) {
                 blockXP += 1.0F;
             }
+            player.getEntityData().setFloat("blockXP", blockXP);
         }
     }
 }
