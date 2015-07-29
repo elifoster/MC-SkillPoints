@@ -52,5 +52,9 @@ public interface SkillHandler<E extends Event> {
 	 */
 	public List<Perk<E>> newPerks(String group, Integer level);
 
+	/**
+	 * Saves the perks in this group to the player
+	 * @param player player to save perks of
+	 */
 	public void save(EntityPlayer player);
 }

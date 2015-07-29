@@ -138,6 +138,11 @@ public class MasterHandler {
 		return perks;
 	}
 
+	/**
+	 * Should be called by XPHandlers when a player levels up
+	 * @param player player that has leveled up
+	 * @param xpHandler group that the player has leveled up in
+	 */
 	public void levelUp(EntityPlayer player, XPHandler xpHandler) {
 		// TODO add a config option for global or not
 		String toSend = player.getDisplayName() + " has leveled up in xp group " + xpHandler.name() + " and has earned the following perks";
