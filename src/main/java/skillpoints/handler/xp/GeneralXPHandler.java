@@ -2,12 +2,17 @@ package skillpoints.handler.xp;
 
 import net.minecraft.entity.player.EntityPlayer;
 import skillpoints.SkillPointsMod;
+import skillpoints.api.MasterHandler;
 import skillpoints.api.xp.XPHandler;
 
 /**
  * @author Strikingwolf
  */
 public abstract class GeneralXPHandler implements XPHandler {
+	public GeneralXPHandler() {
+		MasterHandler.INSTANCE.addXPHandler(this);
+	}
+
 	public abstract int levelReset();
 
 	public void addXP(EntityPlayer player, int amount) {
