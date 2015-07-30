@@ -16,7 +16,10 @@ public class MasterHandler {
 	public static MasterHandler INSTANCE = new MasterHandler();
 
 	protected ArrayList<XPHandler> xpHandlers = new ArrayList<XPHandler>();
+	protected HashMap<String, XPHandler> xpHandlersHash = new HashMap<String, XPHandler>();
 	protected ArrayList<SkillHandler> skillHandlers = new ArrayList<SkillHandler>();
+	protected HashMap<String, SkillHandler> skillHandlersHash = new HashMap<String, SkillHandler>();
+
 
 	/**
 	 * Adds an XPHandler to the MasterHandler, this allows SkillPoints to use your xpHandler
@@ -24,6 +27,7 @@ public class MasterHandler {
 	 * @return True if xpHandler was added else false
 	 */
 	public boolean addXPHandler(XPHandler xpHandler) {
+		xpHandlersHash.put(xpHandler.name(), xpHandler);
 		return xpHandlers.add(xpHandler);
 	}
 
@@ -33,6 +37,7 @@ public class MasterHandler {
 	 * @param xpHandler the XPHandler to add
 	 */
 	public void addXPHandler(int idx, XPHandler xpHandler) {
+		xpHandlersHash.put(xpHandler.name(), xpHandler);
 		xpHandlers.add(idx, xpHandler);
 	}
 
@@ -42,6 +47,7 @@ public class MasterHandler {
 	 * @return True if skillHandler was added else false
 	 */
 	public boolean addSkillHandler(SkillHandler skillHandler) {
+		skillHandlersHash.put(skillHandler.name(), skillHandler);
 		skillHandler.bus().register(skillHandler);
 		return skillHandlers.add(skillHandler);
 	}
@@ -52,6 +58,7 @@ public class MasterHandler {
 	 * @param skillHandler the SkillHandler to add
 	 */
 	public void addSkillHandler(int idx, SkillHandler skillHandler) {
+		skillHandlersHash.put(skillHandler.name(), skillHandler);
 		skillHandler.bus().register(skillHandler);
 		skillHandlers.add(idx, skillHandler);
 	}
@@ -157,5 +164,41 @@ public class MasterHandler {
 		// TODO actually send the toSend variable to the player
 	}
 
-	// TODO things?
+	/**
+	 * Gets an xpHandler in the specified index
+	 * @param idx index to get
+	 * @return xpHandler in index idx
+	 */
+	public XPHandler getXPHandler(int idx) {
+		return xpHandlers.get(idx);
+	}
+
+	/**
+	 * Gets an skillHandler in the specified index
+	 * @param idx index to get
+	 * @return skillHandler in index idx
+	 */
+	public SkillHandler getSkillHandler(int idx) {
+		return skillHandlers.get(idx);
+	}
+
+	/**
+	 * Gets the xpHandler with the specified name
+	 * @param name name of xpHandler to get
+	 * @return xpHandler with specified name
+	 */
+	public XPHandler getXPHandler(String name) {
+		return xpHandlersHash.get(name);
+	}
+
+	/**
+	 * Gets the skillHandler with the specified name
+	 * @param name name of skillHandler to get
+	 * @return skillHandler with specified name
+	 */
+	public SkillHandler getSkillHandler(String name) {
+		return skillHandlersHash.get(name);
+	}
+
+	// TODO, generify as described here (http://paste.ee/p/rQIXy)
 }
