@@ -1,6 +1,5 @@
 package skillpoints.handler.xp;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import skillpoints.SkillPointsMod;
 import skillpoints.api.xp.XPHandler;
@@ -8,10 +7,7 @@ import skillpoints.api.xp.XPHandler;
 /**
  * @author Strikingwolf
  */
-public abstract class GeneralXPHandler<E> implements XPHandler {
-	@SubscribeEvent
-	public abstract void handle(E event);
-
+public abstract class GeneralXPHandler implements XPHandler {
 	public abstract int levelReset();
 
 	public void addXP(EntityPlayer player, int amount) {

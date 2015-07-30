@@ -11,44 +11,48 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
-public class ArcheryCombatEventHandler extends GeneralXPHandler<LivingAttackEvent> {
-	@Override
-	public void handle(LivingAttackEvent event) {
-		if (event.source.isProjectile() && event.source.getEntity() instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.source.getEntity();
-			if (player.getHeldItem() != null) {
-				if (player.getHeldItem().getItem() instanceof ItemBow) {
-					int archeryXP = xp(player);
-					int toAdd = 0;
-					if (event.entity.isEntityAlive()) {
-						if (event.entity instanceof EntityAnimal) {
-							toAdd = 5;
-						} else if (event.entity instanceof EntityMob ||
-							event.entity instanceof EntityCreature) {
-							toAdd = 10;
-							System.out.println(String.valueOf(archeryXP)); // TESTING
-						} else if (event.entity instanceof EntityPlayer) {
-							toAdd = 15;
-						} else if (event.entity instanceof EntityEnderman) {
-							toAdd = 5;
+public class ArcheryCombatEventHandler extends GeneralXPHandler {
+	@SubscribeEvent
+	public void archeryAttack(LivingAttackEvent event) {
+		if (!event.entity.worldObj.isRemote) {
+			if (event.source.isProjectile() && event.source.getEntity() instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) event.source.getEntity();
+				if (player.getHeldItem() != null) {
+					if (player.getHeldItem().getItem() instanceof ItemBow) {
+						int archeryXP = xp(player);
+						int toAdd = 0;
+						if (event.entity.isEntityAlive()) {
+							if (event.entity instanceof EntityAnimal) {
+								toAdd = 5;
+							} else if (event.entity instanceof EntityMob ||
+								event.entity instanceof EntityCreature) {
+								toAdd = 10;
+							} else if (event.entity instanceof EntityPlayer) {
+								toAdd = 15;
+							} else if (event.entity instanceof EntityEnderman) {
+								toAdd = 5;
+							}
+						} else if (event.entity.isDead) {
+							if (event.entity instanceof EntityAnimal) {
+								toAdd = 5;
+							} else if (event.entity instanceof EntityMob ||
+								event.entity instanceof EntityCreature) {
+								toAdd = 15;
+							} else if (event.entity instanceof EntityPlayer) {
+								toAdd = 20;
+							} else if (event.entity instanceof EntityEnderman) {
+								toAdd = 70;
+							} else if (event.entity instanceof EntityWither ||
+								event.entity instanceof EntityDragon) {
+								toAdd = archeryXP;
+							}
 						}
-					} else if (event.entity.isDead) {
-						if (event.entity instanceof EntityAnimal) {
-							toAdd = 5;
-						} else if (event.entity instanceof EntityMob ||
-							event.entity instanceof EntityCreature) {
-							toAdd = 15;
-						} else if (event.entity instanceof EntityPlayer) {
-							toAdd = 20;
-						} else if (event.entity instanceof EntityEnderman) {
-							toAdd = 70;
-						} else if (event.entity instanceof EntityWither ||
-							event.entity instanceof EntityDragon) {
-							toAdd = archeryXP;
-						}
-					}
 
-					addXP(player, toAdd);
+						System.out.println(String.valueOf(archeryXP)); // TESTING
+						addXP(player, toAdd);
+						System.out.println(String.valueOf(xp(player))); // TESTING
+						save(player);
+					}
 				}
 			}
 		}
