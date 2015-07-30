@@ -13,22 +13,20 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class ArcheryCombatEventHandler {
 
-    public float archeryXP = 0.0F;
-
     @SubscribeEvent
     public void handleAttackWithBow(LivingAttackEvent event) {
         if (event.source.isProjectile() && event.source.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.source.getEntity();
             if (player.getHeldItem() != null) {
                 if (player.getHeldItem().getItem() instanceof ItemBow) {
-                    //float archeryLevelLast = archeryXP;
-
+                    float archeryXP = player.getEntityData().getFloat("archeryXP");
                     if (event.entity.isEntityAlive()) {
                         if (event.entity instanceof EntityAnimal) {
                             archeryXP += 0.5F;
                         } else if (event.entity instanceof EntityMob ||
                           event.entity instanceof EntityCreature) {
                             archeryXP += 1.0F;
+                            System.out.println(String.valueOf(archeryXP)); // TESTING
                         } else if (event.entity instanceof EntityPlayer) {
                             archeryXP += 1.5F;
                         } else if (event.entity instanceof EntityEnderman) {
@@ -49,6 +47,8 @@ public class ArcheryCombatEventHandler {
                             archeryXP += archeryXP;
                         }
                     }
+
+                    player.getEntityData().setFloat("archeryXP", archeryXP);
                 }
             }
         }

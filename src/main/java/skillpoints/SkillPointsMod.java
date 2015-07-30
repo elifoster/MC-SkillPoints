@@ -5,17 +5,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
-import skillpoints.handler.ArcheryCombatEventHandler;
-import skillpoints.handler.BlockEventHandler;
-import skillpoints.handler.BrewingEventHandler;
-import skillpoints.handler.EnchantingEventHandler;
-import skillpoints.handler.FarmingEventHandler;
-import skillpoints.handler.FishingEventHandler;
-import skillpoints.handler.LootingEventHandler;
-import skillpoints.handler.MeleeCombatEventHandler;
-import skillpoints.handler.MiningEventHandler;
-import skillpoints.handler.SmithingEventHandler;
-import skillpoints.handler.SpeechEventHandler;
+import skillpoints.handler.*;
 
 @Mod(modid = SkillPointsMod.MODID, name = SkillPointsMod.NAME, version = SkillPointsMod.VERSION)
 public class SkillPointsMod {
@@ -30,6 +20,7 @@ public class SkillPointsMod {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new GlobalSkillsEventHandler());
         if (Config.enableMeleeSystem) {
             MinecraftForge.EVENT_BUS.register(new MeleeCombatEventHandler());
         }
