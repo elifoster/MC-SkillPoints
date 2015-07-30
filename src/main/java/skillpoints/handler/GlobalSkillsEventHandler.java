@@ -17,17 +17,17 @@ public class GlobalSkillsEventHandler {
     }
 
     public void setDefaultExperienceFloats(EntityPlayer player) {
-        player.getEntityData().setFloat("archeryXP", 0.0F);
-        player.getEntityData().setFloat("blockXP", 0.0F);
-        player.getEntityData().setFloat("brewingXP", 0.0F);
-        player.getEntityData().setFloat("enchantingXP", 0.0F);
-        player.getEntityData().setFloat("farmingXP", 0.0F);
-        player.getEntityData().setFloat("fishingXP", 0.0F);
-        player.getEntityData().setFloat("lootingXP", 0.0F);
-        player.getEntityData().setFloat("meleeXP", 0.0F);
-        player.getEntityData().setFloat("miningXP", 0.0F);
-        player.getEntityData().setFloat("smithingXP", 0.0F);
-        player.getEntityData().setFloat("speechXP", 0.0F);
+        player.getEntityData().setInteger("archeryXP", 0);
+        player.getEntityData().setInteger("blockXP", 0);
+        player.getEntityData().setInteger("brewingXP", 0);
+        player.getEntityData().setInteger("enchantingXP", 0);
+        player.getEntityData().setInteger("farmingXP", 0);
+        player.getEntityData().setInteger("fishingXP", 0);
+        player.getEntityData().setInteger("lootingXP", 0);
+        player.getEntityData().setInteger("meleeXP", 0);
+        player.getEntityData().setInteger("miningXP", 0);
+        player.getEntityData().setInteger("smithingXP", 0);
+        player.getEntityData().setInteger("speechXP", 0);
     }
 
     public void setDefaultLevelInts(EntityPlayer player) {

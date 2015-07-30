@@ -13,24 +13,24 @@ public class MiningEventHandler {
         if (event.getExpToDrop() > 0 &&
           event.block.canHarvestBlock(event.getPlayer(), event.blockMetadata) &&
           event.getPlayer().getHeldItem().getItem() instanceof ItemPickaxe) {
-            float miningXP = event.getPlayer().getEntityData().getFloat("miningXP");
+            int miningXP = event.getPlayer().getEntityData().getInteger("miningXP");
             for (int i = 0; i < OreDictionary.getOreNames().length; i++) {
                 if (OreDictionary.getOreNames()[i].contains("ore")) {
-                    miningXP += 0.5F;
+                    miningXP += 5;
                 }
             }
-            event.getPlayer().getEntityData().setFloat("miningXP", miningXP);
+            event.getPlayer().getEntityData().setInteger("miningXP", miningXP);
         }
     }
 
     @SubscribeEvent
     public void onItemSmelted(PlayerEvent.ItemSmeltedEvent event) {
-        float miningXP = event.player.getEntityData().getFloat("miningXP");
+        int miningXP = event.player.getEntityData().getInteger("miningXP");
         for (int i = 0; i < OreDictionary.getOreNames().length; i++) {
             if (OreDictionary.getOreNames()[i].contains("ore")) {
-                miningXP += 0.5F;
+                miningXP += 5;
             }
         }
-        event.player.getEntityData().setFloat("miningXP", miningXP);
+        event.player.getEntityData().setInteger("miningXP", miningXP);
     }
 }

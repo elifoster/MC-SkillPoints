@@ -10,11 +10,11 @@ public class BlockEventHandler {
     public void handleBlock(LivingAttackEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
-            float blockXP = player.getEntityData().getFloat("blockXP");
+            int blockXP = player.getEntityData().getInteger("blockXP");
             if (player.isBlocking()) {
-                blockXP += 1.0F;
+                blockXP += 1;
             }
-            player.getEntityData().setFloat("blockXP", blockXP);
+            player.getEntityData().setInteger("blockXP", blockXP);
         }
     }
 }

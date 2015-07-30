@@ -9,9 +9,9 @@ public class SmithingEventHandler {
     @SubscribeEvent
     public void onItemRepaired(AnvilRepairEvent event) {
         if (event.getResult() == Event.Result.ALLOW && event.output != null) {
-            float smithingXP = event.entityPlayer.getEntityData().getFloat("smithingXP");
-            smithingXP += 0.5F;
-            event.entityPlayer.getEntityData().setFloat("smithingXP", smithingXP);
+            int smithingXP = event.entityPlayer.getEntityData().getInteger("smithingXP");
+            smithingXP += 5;
+            event.entityPlayer.getEntityData().setInteger("smithingXP", smithingXP);
         }
     }
 }

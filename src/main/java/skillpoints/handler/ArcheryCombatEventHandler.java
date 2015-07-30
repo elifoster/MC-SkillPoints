@@ -19,36 +19,36 @@ public class ArcheryCombatEventHandler {
             EntityPlayer player = (EntityPlayer) event.source.getEntity();
             if (player.getHeldItem() != null) {
                 if (player.getHeldItem().getItem() instanceof ItemBow) {
-                    float archeryXP = player.getEntityData().getFloat("archeryXP");
+                    int archeryXP = player.getEntityData().getInteger("archeryXP");
                     if (event.entity.isEntityAlive()) {
                         if (event.entity instanceof EntityAnimal) {
-                            archeryXP += 0.5F;
+                            archeryXP += 5;
                         } else if (event.entity instanceof EntityMob ||
                           event.entity instanceof EntityCreature) {
-                            archeryXP += 1.0F;
+                            archeryXP += 10;
                             System.out.println(String.valueOf(archeryXP)); // TESTING
                         } else if (event.entity instanceof EntityPlayer) {
-                            archeryXP += 1.5F;
+                            archeryXP += 15;
                         } else if (event.entity instanceof EntityEnderman) {
-                            archeryXP += 5.0F;
+                            archeryXP += 5;
                         }
                     } else if (event.entity.isDead) {
                         if (event.entity instanceof EntityAnimal) {
-                            archeryXP += 0.5F;
+                            archeryXP += 5;
                         } else if (event.entity instanceof EntityMob ||
                           event.entity instanceof EntityCreature) {
-                            archeryXP += 1.5F;
+                            archeryXP += 15;
                         } else if (event.entity instanceof EntityPlayer) {
-                            archeryXP += 2.0F;
+                            archeryXP += 20;
                         } else if (event.entity instanceof EntityEnderman) {
-                            archeryXP += 7.0F;
+                            archeryXP += 70;
                         } else if (event.entity instanceof EntityWither ||
                           event.entity instanceof EntityDragon) {
                             archeryXP += archeryXP;
                         }
                     }
 
-                    player.getEntityData().setFloat("archeryXP", archeryXP);
+                    player.getEntityData().setInteger("archeryXP", archeryXP);
                 }
             }
         }

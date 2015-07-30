@@ -24,26 +24,26 @@ public class MeleeCombatEventHandler {
 		boolean goodItem = isHand || isSword || isAxe;
 
 		if (goodItem) {
-			float meleeXP = player.getEntityData().getFloat("meleeXP");
+			int meleeXP = player.getEntityData().getInteger("meleeXP");
 			if (event.entity.isEntityAlive()) {
 				if (isHand) {
-					meleeXP += 0.5F;
+					meleeXP += 5;
 				} else if (isSword) {
-					meleeXP += 1.5F;
+					meleeXP += 15;
 				} else if (isAxe) {
-					meleeXP += 1.0F;
+					meleeXP += 10;
 				}
 			} else if (event.entity.isDead) {
 				if (isHand) {
-					meleeXP += 1.0F;
+					meleeXP += 10;
 				} else if (player.getHeldItem().getItem() instanceof ItemSword) {
-					meleeXP += 2.0F;
+					meleeXP += 20;
 				} else if (isAxe) {
-					meleeXP += 1.5F;
+					meleeXP += 15;
 				}
 			}
 
-			player.getEntityData().setFloat("meleeXP", meleeXP);
+			player.getEntityData().setInteger("meleeXP", meleeXP);
 		}
     }
 }

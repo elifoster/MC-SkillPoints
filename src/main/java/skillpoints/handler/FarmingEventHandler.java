@@ -23,9 +23,9 @@ public class FarmingEventHandler {
     @SubscribeEvent
     public void onBonemeal(BonemealEvent event) {
         if (event.getResult() == Event.Result.ALLOW) {
-            float farmingXP = event.entityPlayer.getEntityData().getFloat("farmingXP");
-            farmingXP += 0.5F;
-            event.entityPlayer.getEntityData().setFloat("farmingXP", farmingXP);
+            int farmingXP = event.entityPlayer.getEntityData().getInteger("farmingXP");
+            farmingXP += 5;
+            event.entityPlayer.getEntityData().setInteger("farmingXP", farmingXP);
         }
     }
 
@@ -35,9 +35,9 @@ public class FarmingEventHandler {
             for (int i = 0; i < event.drops.size(); i++) {
                 if (event.drops.get(i).getItem() instanceof ItemSeeds ||
                   event.drops.get(i).getItem() instanceof ItemFood) {
-                    float farmingXP = event.harvester.getEntityData().getFloat("farmingXP");
-                    farmingXP += 1.0F;
-                    event.harvester.getEntityData().setFloat("farmingXP", farmingXP);
+                    int farmingXP = event.harvester.getEntityData().getInteger("farmingXP");
+                    farmingXP += 1;
+                    event.harvester.getEntityData().setInteger("farmingXP", farmingXP);
                 }
             }
         }
