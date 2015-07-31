@@ -6,6 +6,8 @@ import skillpoints.api.APIStatus;
 import skillpoints.apiimpl.v1.APIimplv1;
 
 public class APISelector implements APIBase {
+	private APIimplv1 apIimplv1 = null;
+
 	private APISelector() {}
 
 	public static void init() {
@@ -17,7 +19,10 @@ public class APISelector implements APIBase {
 		if (maxVersion <= 0) {
 			return this;
 		} else {
-			return new APIimplv1(1, APIStatus.OK);
+			if (apIimplv1 == null) {
+				apIimplv1 = new APIimplv1(1, APIStatus.OK);
+			}
+			return apIimplv1;
 		}
 	}
 
