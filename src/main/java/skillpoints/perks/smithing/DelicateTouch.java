@@ -2,7 +2,7 @@ package skillpoints.perks.smithing;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
-import skillpoints.api.perks.Perk;
+import skillpoints.api.v1.Perk;
 
 public class DelicateTouch implements Perk<AnvilRepairEvent> {
 

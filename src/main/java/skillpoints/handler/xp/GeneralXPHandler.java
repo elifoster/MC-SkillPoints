@@ -3,18 +3,16 @@ package skillpoints.handler.xp;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
 import skillpoints.SkillPointsMod;
-import skillpoints.api.MasterHandler;
-import skillpoints.api.xp.XPHandler;
+import skillpoints.api.v1.XPHandler;
+import skillpoints.util.IterableUtil;
 
 import java.util.List;
 
 public abstract class GeneralXPHandler implements XPHandler {
 	public GeneralXPHandler() {
 		if (enabled()) {
-			MasterHandler.INSTANCE.addXPHandler(this);
-			for (EventBus bus : this.buses()) {
-				bus.register(this);
-			}
+			SkillPointsMod.getAPI().addXPHandler(this);
+			IterableUtil.registerAll(this.buses(), this);
 		}
 	}
 

@@ -3,7 +3,7 @@ package skillpoints.handler;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
-import skillpoints.api.perks.Perk;
+import skillpoints.api.v1.Perk;
 import skillpoints.perks.SkillsRef;
 
 public class SmithingEventHandler {

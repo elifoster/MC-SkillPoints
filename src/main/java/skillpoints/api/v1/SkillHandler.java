@@ -1,10 +1,8 @@
-package skillpoints.api.skill;
+package skillpoints.api.v1;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventBus;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import skillpoints.api.perks.Perk;
 
 import java.util.HashMap;
 import java.util.List;

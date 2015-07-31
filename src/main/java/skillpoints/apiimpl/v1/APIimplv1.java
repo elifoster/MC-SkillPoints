@@ -1,10 +1,14 @@
-package skillpoints.api;
+package skillpoints.apiimpl.v1;
 
-import com.google.common.eventbus.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
-import skillpoints.api.perks.Perk;
-import skillpoints.api.skill.SkillHandler;
-import skillpoints.api.xp.XPHandler;
+import skillpoints.api.API;
+import skillpoints.api.APIBase;
+import skillpoints.api.APIStatus;
+import skillpoints.api.v1.APIv1;
+import skillpoints.api.v1.Perk;
+import skillpoints.api.v1.SkillHandler;
+import skillpoints.api.v1.XPHandler;
+import skillpoints.util.IterableUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,67 +17,66 @@ import java.util.List;
 /**
  * @author Strikingwolf
  */
-public class MasterHandler {
-	public static MasterHandler INSTANCE = new MasterHandler();
+public class APIimplv1 implements APIv1 {
+	protected final int version;
+	protected final APIStatus status;
 
 	protected ArrayList<XPHandler> xpHandlers = new ArrayList<XPHandler>();
 	protected HashMap<String, XPHandler> xpHandlersHash = new HashMap<String, XPHandler>();
 	protected ArrayList<SkillHandler> skillHandlers = new ArrayList<SkillHandler>();
 	protected HashMap<String, SkillHandler> skillHandlersHash = new HashMap<String, SkillHandler>();
 
+	public APIimplv1(int version, APIStatus status) {
+		this.version = version;
+		this.status = status;
+	}
 
-	/**
-	 * Adds an XPHandler to the MasterHandler, this allows SkillPoints to use your xpHandler
-	 * @param xpHandler the XPHandler to add
-	 * @return True if xpHandler was added else false
-	 */
+	@Override
+	public APIBase getAPI(int maxVersion) {
+		if (maxVersion == version && status == APIStatus.OK) {
+			return this;
+		} else {
+			return API.getAPI(maxVersion);
+		}
+	}
+
+	@Override
+	public APIStatus getStatus() {
+		return status;
+	}
+
+	@Override
+	public int getVersion() {
+		return version;
+	}
+
+	@Override
 	public boolean addXPHandler(XPHandler xpHandler) {
 		xpHandlersHash.put(xpHandler.name(), xpHandler);
 		return xpHandlers.add(xpHandler);
 	}
 
-	/**
-	 * Adds an XPHandler to the MasterHandler, this allows SkillPoints to use your xpHandler
-	 * @param idx index to add the XPHandler at
-	 * @param xpHandler the XPHandler to add
-	 */
+	@Override
 	public void addXPHandler(int idx, XPHandler xpHandler) {
 		xpHandlersHash.put(xpHandler.name(), xpHandler);
 		xpHandlers.add(idx, xpHandler);
 	}
 
-	/**
-	 * Adds a SkillHandler to the MasterHandler, this allows SkillPoints to use your skillHandler
-	 * @param skillHandler the SkillHandler to add
-	 * @return True if skillHandler was added else false
-	 */
+	@Override
 	public boolean addSkillHandler(SkillHandler skillHandler) {
 		skillHandlersHash.put(skillHandler.name(), skillHandler);
-		registerToAll(skillHandler, skillHandler.buses());
+		IterableUtil.registerAll(skillHandler.buses(), skillHandler);
 		return skillHandlers.add(skillHandler);
 	}
 
-	/**
-	 * Adds a SkillHandler to the MasterHandler, this allows SkillPoints to use your skillHandler
-	 * @param idx index to add the SkillHandler at
-	 * @param skillHandler the SkillHandler to add
-	 */
+	@Override
 	public void addSkillHandler(int idx, SkillHandler skillHandler) {
 		skillHandlersHash.put(skillHandler.name(), skillHandler);
-		registerToAll(skillHandler, skillHandler.buses());
+		IterableUtil.registerAll(skillHandler.buses(), skillHandler);
 		skillHandlers.add(idx, skillHandler);
 	}
 
-	private static void registerToAll(Object o, List<EventBus> buses) {
-		for (EventBus bus : buses) {
-			bus.register(o);
-		}
-	}
-
-	/**
-	 * Saves the current state of the player
-	 * @param player player to save the state of
-	 */
+	@Override
 	public void save(EntityPlayer player) {
 		for (SkillHandler skillHandler : skillHandlers) {
 			skillHandler.save(player);
@@ -84,21 +87,14 @@ public class MasterHandler {
 		}
 	}
 
-	/**
-	 * Saves all the players states
-	 * @param players players to save
-	 */
+	@Override
 	public void save(List<EntityPlayer> players) {
 		for (EntityPlayer player : players) {
 			this.save(player);
 		}
 	}
 
-	/**
-	 * Gets the available perks for a player
-	 * @param player Player to get the perks of
-	 * @return Hash from group name to list of available perks
-	 */
+	@Override
 	public HashMap<String, List<Perk>> availablePerks(EntityPlayer player) {
 		HashMap<String, List<Perk>> perks = new HashMap<String, List<Perk>>();
 		HashMap<String, Integer> xp = new HashMap<String, Integer>();
@@ -124,12 +120,7 @@ public class MasterHandler {
 		return perks;
 	}
 
-	/**
-	 * Gets the new perks for a player given the xpHandler that was updated
-	 * @param player Player to get new perks for
-	 * @param xpHandler XPHandler that updated
-	 * @return Hash from Skill group to list of Perks gained
-	 */
+	@Override
 	public HashMap<String, List<Perk>> newPerks(EntityPlayer player, XPHandler xpHandler) {
 		HashMap<String, List<Perk>> perks = new HashMap<String, List<Perk>>();
 		String xpName = xpHandler.name();
@@ -152,11 +143,7 @@ public class MasterHandler {
 		return perks;
 	}
 
-	/**
-	 * Should be called by XPHandlers when a player levels up
-	 * @param player player that has leveled up
-	 * @param xpHandler group that the player has leveled up in
-	 */
+	@Override
 	public void levelUp(EntityPlayer player, XPHandler xpHandler) {
 		// TODO add a config option for global or not
 		String toSend = player.getDisplayName() + " has leveled up in xp group " + xpHandler.name() + " and has earned the following perks";
@@ -171,41 +158,24 @@ public class MasterHandler {
 		// TODO actually send the toSend variable to the player
 	}
 
-	/**
-	 * Gets an xpHandler in the specified index
-	 * @param idx index to get
-	 * @return xpHandler in index idx
-	 */
+	@Override
 	public XPHandler getXPHandler(int idx) {
 		return xpHandlers.get(idx);
 	}
 
-	/**
-	 * Gets an skillHandler in the specified index
-	 * @param idx index to get
-	 * @return skillHandler in index idx
-	 */
+
+	@Override
 	public SkillHandler getSkillHandler(int idx) {
 		return skillHandlers.get(idx);
 	}
 
-	/**
-	 * Gets the xpHandler with the specified name
-	 * @param name name of xpHandler to get
-	 * @return xpHandler with specified name
-	 */
+	@Override
 	public XPHandler getXPHandler(String name) {
 		return xpHandlersHash.get(name);
 	}
 
-	/**
-	 * Gets the skillHandler with the specified name
-	 * @param name name of skillHandler to get
-	 * @return skillHandler with specified name
-	 */
+	@Override
 	public SkillHandler getSkillHandler(String name) {
 		return skillHandlersHash.get(name);
 	}
-
-	// TODO, generify as described here (http://paste.ee/p/rQIXy)
 }

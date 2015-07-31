@@ -5,7 +5,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.perks.Perk;
+import skillpoints.api.v1.Perk;
 
 public class Strongarm implements Perk<AttackEntityEvent> {
 
