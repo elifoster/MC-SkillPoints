@@ -3,10 +3,10 @@ package skillpoints.apiimpl;
 import skillpoints.api.API;
 import skillpoints.api.APIBase;
 import skillpoints.api.APIStatus;
-import skillpoints.apiimpl.v1.APIimplv1;
+import skillpoints.apiimpl.v1.APIHandlerV1;
 
 public class APISelector implements APIBase {
-	private APIimplv1 apIimplv1 = null;
+	private APIHandlerV1 apiHandlerV1 = null;
 
 	private APISelector() {}
 
@@ -19,10 +19,10 @@ public class APISelector implements APIBase {
 		if (maxVersion <= 0) {
 			return this;
 		} else {
-			if (apIimplv1 == null) {
-				apIimplv1 = new APIimplv1(1, APIStatus.OK);
+			if (apiHandlerV1 == null) {
+				apiHandlerV1 = new APIHandlerV1(1, APIStatus.OK);
 			}
-			return apIimplv1;
+			return apiHandlerV1;
 		}
 	}
 

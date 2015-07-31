@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Strikingwolf
  */
-public class APIimplv1 implements APIv1 {
+public class APIHandlerV1 implements APIv1 {
 	protected final int version;
 	protected final APIStatus status;
 
@@ -26,7 +26,7 @@ public class APIimplv1 implements APIv1 {
 	protected ArrayList<SkillHandler> skillHandlers = new ArrayList<SkillHandler>();
 	protected HashMap<String, SkillHandler> skillHandlersHash = new HashMap<String, SkillHandler>();
 
-	public APIimplv1(int version, APIStatus status) {
+	public APIHandlerV1(int version, APIStatus status) {
 		this.version = version;
 		this.status = status;
 	}
