@@ -1,4 +1,4 @@
-package skillpoints.api.xp;
+package skillpoints.api.v1;
 
 import net.minecraft.entity.player.EntityPlayer;
 

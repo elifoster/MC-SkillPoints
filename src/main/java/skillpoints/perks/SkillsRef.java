@@ -2,7 +2,7 @@ package skillpoints.perks;
 
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.perks.Perk;
+import skillpoints.api.v1.Perk;
 import skillpoints.perks.melee.Strongarm;
 import skillpoints.perks.smithing.DelicateTouch;
 import skillpoints.perks.smithing.StrongerMetals;

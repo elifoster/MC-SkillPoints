@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import skillpoints.api.perks.Perk;
+import skillpoints.api.v1.Perk;
 import skillpoints.perks.SkillsRef;
 
 public class MeleeCombatEventHandler {

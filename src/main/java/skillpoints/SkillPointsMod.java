@@ -5,8 +5,22 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
-import skillpoints.handler.*;
-import skillpoints.handler.xp.*;
+import skillpoints.api.API;
+import skillpoints.api.APIBase;
+import skillpoints.api.v1.APIv1;
+import skillpoints.apiimpl.APISelector;
+import skillpoints.handler.BlockEventHandler;
+import skillpoints.handler.BrewingEventHandler;
+import skillpoints.handler.EnchantingEventHandler;
+import skillpoints.handler.FarmingEventHandler;
+import skillpoints.handler.FishingEventHandler;
+import skillpoints.handler.GlobalSkillsEventHandler;
+import skillpoints.handler.LootingEventHandler;
+import skillpoints.handler.MeleeCombatEventHandler;
+import skillpoints.handler.MiningEventHandler;
+import skillpoints.handler.SmithingEventHandler;
+import skillpoints.handler.SpeechEventHandler;
+import skillpoints.handler.xp.ArcheryCombatEventHandler;
 
 @Mod(modid = SkillPointsMod.MODID, name = SkillPointsMod.NAME, version = SkillPointsMod.VERSION)
 public class SkillPointsMod {
@@ -16,9 +30,19 @@ public class SkillPointsMod {
 	public static final String LEVEL_DATA = "LEVEL";
 	public static final String XP_DATA = "XP";
 
+	public static APIv1 getAPI() {
+		try {
+			return (APIv1) API.getAPI(1);
+		} catch (ClassCastException e) {
+			System.out.println("The Skill Points API is broken");
+			throw e;
+		}
+	}
+
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Config.load(event);
+		APISelector.init();
     }
 
     @EventHandler

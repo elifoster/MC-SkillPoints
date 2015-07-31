@@ -2,11 +2,11 @@ package skillpoints.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import skillpoints.api.MasterHandler;
+import skillpoints.SkillPointsMod;
 
 public class WorldShutdownHandler {
 	@SubscribeEvent
 	public void onShutdown(WorldEvent.Unload unload) {
-		MasterHandler.INSTANCE.save(unload.world.playerEntities);
+		SkillPointsMod.getAPI().save(unload.world.playerEntities);
 	}
 }

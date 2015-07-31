@@ -1,4 +1,4 @@
-package skillpoints.api.perks;
+package skillpoints.api.v1;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
