@@ -7,6 +7,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import skillpoints.api.API;
+import skillpoints.api.APIBase;
+import skillpoints.api.APIStatus;
 import skillpoints.api.v1.APIv1;
 import skillpoints.apiimpl.APISelector;
 import skillpoints.handler.BlockEventHandler;
@@ -33,7 +35,14 @@ public class SkillPointsMod {
 
 	public static APIv1 getAPI() {
 		try {
-			return (APIv1) API.getAPI(1);
+			APIBase api = API.getAPI(1);
+			if (api.getStatus() == APIStatus.OK && api.getVersion() == 1)
+				return (APIv1) api;
+			else {
+				ClassCastException c = new ClassCastException();
+				c.fillInStackTrace();
+				throw c;
+			}
 		} catch (ClassCastException e) {
 			Logger.error("The Skill Points API is broken");
 			throw e;
