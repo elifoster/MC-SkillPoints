@@ -21,6 +21,7 @@ import skillpoints.handler.MiningEventHandler;
 import skillpoints.handler.SmithingEventHandler;
 import skillpoints.handler.SpeechEventHandler;
 import skillpoints.handler.xp.ArcheryCombatEventHandler;
+import skillpoints.util.Logger;
 
 @Mod(modid = SkillPointsMod.MODID, name = SkillPointsMod.NAME, version = SkillPointsMod.VERSION)
 public class SkillPointsMod {
@@ -34,7 +35,7 @@ public class SkillPointsMod {
 		try {
 			return (APIv1) API.getAPI(1);
 		} catch (ClassCastException e) {
-			System.out.println("The Skill Points API is broken");
+			Logger.error("The Skill Points API is broken");
 			throw e;
 		}
 	}

@@ -13,6 +13,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import skillpoints.Config;
+import skillpoints.util.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +55,9 @@ public class ArcheryCombatEventHandler extends GeneralXPHandler {
 							}
 						}
 
-						System.out.println(String.valueOf(archeryXP)); // TESTING
+						Logger.debug(String.valueOf(archeryXP)); // TESTING
 						addXP(player, toAdd);
-						System.out.println(String.valueOf(xp(player))); // TESTING
+						Logger.debug(String.valueOf(xp(player))); // TESTING
 						save(player);
 					}
 				}
