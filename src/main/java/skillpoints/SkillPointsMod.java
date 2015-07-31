@@ -1,12 +1,12 @@
 package skillpoints;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import skillpoints.api.API;
-import skillpoints.api.APIBase;
 import skillpoints.api.v1.APIv1;
 import skillpoints.apiimpl.APISelector;
 import skillpoints.handler.BlockEventHandler;
@@ -42,7 +42,8 @@ public class SkillPointsMod {
 
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Config.load(event);
+        Config.init(event.getSuggestedConfigurationFile());
+		FMLCommonHandler.instance().bus().register(new Config());
 		APISelector.init();
     }
 
