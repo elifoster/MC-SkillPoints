@@ -15,25 +15,11 @@ public interface APIv1 extends APIBase {
 	public boolean addXPHandler(XPHandler xpHandler);
 
 	/**
-	 * Adds an XPHandler to the MasterHandler, this allows SkillPoints to use your xpHandler
-	 * @param idx index to add the XPHandler at
-	 * @param xpHandler the XPHandler to add
-	 */
-	public void addXPHandler(int idx, XPHandler xpHandler);
-
-	/**
 	 * Adds a SkillHandler to the MasterHandler, this allows SkillPoints to use your skillHandler
 	 * @param skillHandler the SkillHandler to add
 	 * @return True if skillHandler was added else false
 	 */
 	public boolean addSkillHandler(SkillHandler skillHandler);
-
-	/**
-	 * Adds a SkillHandler to the MasterHandler, this allows SkillPoints to use your skillHandler
-	 * @param idx index to add the SkillHandler at
-	 * @param skillHandler the SkillHandler to add
-	 */
-	public void addSkillHandler(int idx, SkillHandler skillHandler);
 
 	/**
 	 * Saves the current state of the player
@@ -70,18 +56,16 @@ public interface APIv1 extends APIBase {
 	public void levelUp(EntityPlayer player, XPHandler xpHandler);
 
 	/**
-	 * Gets an xpHandler in the specified index
-	 * @param idx index to get
-	 * @return xpHandler in index idx
+	 * Gets the list of all the xpHandlers
+	 * @return xpHandlers registered to this API
 	 */
-	public XPHandler getXPHandler(int idx);
+	public List<XPHandler> xpHandlers();
 
 	/**
-	 * Gets an skillHandler in the specified index
-	 * @param idx index to get
-	 * @return skillHandler in index idx
+	 * Gets the list of all the skillHandlers
+	 * @return skillHandlers registered to this API
 	 */
-	public SkillHandler getSkillHandler(int idx);
+	public List<SkillHandler> skillHandlers();
 
 	/**
 	 * Gets the xpHandler with the specified name
