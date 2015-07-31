@@ -55,9 +55,9 @@ public class ArcheryCombatEventHandler extends GeneralXPHandler {
 							}
 						}
 
-						Logger.debug(String.valueOf(archeryXP)); // TESTING
+						Logger.info(String.valueOf(archeryXP)); // TESTING
 						addXP(player, toAdd);
-						Logger.debug(String.valueOf(xp(player))); // TESTING
+						Logger.info(String.valueOf(xp(player))); // TESTING
 						save(player);
 					}
 				}
