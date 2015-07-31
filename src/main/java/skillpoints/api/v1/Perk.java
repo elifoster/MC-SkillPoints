@@ -1,9 +1,8 @@
 package skillpoints.api.v1;
 
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface Perk<E extends Event> {
+public interface Perk<T> {
 	/**
 	 * Get the name of the perk
 	 * @return name
@@ -23,10 +22,10 @@ public interface Perk<E extends Event> {
 	public int levelNeeded();
 
 	/**
-	 * Executes the perk on the specified event
-	 * @param e event
+	 * Executes the perk given a certain object of type T
+	 * @param t object passed in
 	 */
-	public void execute(E e);
+	public void execute(T t);
 
 	/**
 	 * Tells if the player has this perk
