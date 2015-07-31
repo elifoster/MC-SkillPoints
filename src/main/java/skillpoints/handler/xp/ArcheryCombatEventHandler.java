@@ -1,5 +1,6 @@
 package skillpoints.handler.xp;
 
+import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.boss.EntityDragon;
@@ -9,7 +10,12 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import skillpoints.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArcheryCombatEventHandler extends GeneralXPHandler {
 	@SubscribeEvent
@@ -59,9 +65,21 @@ public class ArcheryCombatEventHandler extends GeneralXPHandler {
 	}
 
 	@Override
+	public List<EventBus> buses() {
+		List<EventBus> buses = new ArrayList<EventBus>();
+		buses.add(MinecraftForge.EVENT_BUS);
+		return buses;
+	}
+
+	@Override
 	public int levelReset() {
 		// TODO, actually decide on this
 		return 20;
+	}
+
+	@Override
+	public boolean enabled() {
+		return Config.enableArcherySystem;
 	}
 
 	@Override

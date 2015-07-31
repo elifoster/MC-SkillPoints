@@ -1,19 +1,28 @@
 package skillpoints.handler.xp;
 
+import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
 import skillpoints.SkillPointsMod;
 import skillpoints.api.MasterHandler;
 import skillpoints.api.xp.XPHandler;
 
-/**
- * @author Strikingwolf
- */
+import java.util.List;
+
 public abstract class GeneralXPHandler implements XPHandler {
 	public GeneralXPHandler() {
-		MasterHandler.INSTANCE.addXPHandler(this);
+		if (enabled()) {
+			MasterHandler.INSTANCE.addXPHandler(this);
+			for (EventBus bus : this.buses()) {
+				bus.register(this);
+			}
+		}
 	}
 
+	public abstract List<EventBus> buses();
+
 	public abstract int levelReset();
+
+	public abstract boolean enabled();
 
 	public void addXP(EntityPlayer player, int amount) {
 		int xp = xp(player);

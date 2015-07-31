@@ -1,5 +1,6 @@
 package skillpoints.api;
 
+import com.google.common.eventbus.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
 import skillpoints.api.perks.Perk;
 import skillpoints.api.skill.SkillHandler;
@@ -48,7 +49,7 @@ public class MasterHandler {
 	 */
 	public boolean addSkillHandler(SkillHandler skillHandler) {
 		skillHandlersHash.put(skillHandler.name(), skillHandler);
-		skillHandler.bus().register(skillHandler);
+		registerToAll(skillHandler, skillHandler.buses());
 		return skillHandlers.add(skillHandler);
 	}
 
@@ -59,8 +60,14 @@ public class MasterHandler {
 	 */
 	public void addSkillHandler(int idx, SkillHandler skillHandler) {
 		skillHandlersHash.put(skillHandler.name(), skillHandler);
-		skillHandler.bus().register(skillHandler);
+		registerToAll(skillHandler, skillHandler.buses());
 		skillHandlers.add(idx, skillHandler);
+	}
+
+	private static void registerToAll(Object o, List<EventBus> buses) {
+		for (EventBus bus : buses) {
+			bus.register(o);
+		}
 	}
 
 	/**

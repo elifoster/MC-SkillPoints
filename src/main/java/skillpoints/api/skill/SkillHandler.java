@@ -24,14 +24,15 @@ public interface SkillHandler<E extends Event> {
 	public List<Perk<E>> perks();
 
 	/**
-	 * EventBus that this SkillHandler runs off of
-	 * @return bus that this SkillHandler will be registered to
+	 * EventBuses that this SkillHandler runs off of
+	 * @return buses that this SkillHandler will be registered to
 	 */
-	public EventBus bus();
+	public List<EventBus> buses();
 
-	@SubscribeEvent
 	/**
 	 * Execute possible perks on a certain event
+	 * You need to add the @SubscribeEvent annotation to this method
+	 * If you need more than one event to execute on, just add an extra method with an @SubscribeEvent annotation
 	 * @param event event that has happened
 	 * @return whether or not a skill was executed
 	 */

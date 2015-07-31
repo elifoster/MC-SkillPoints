@@ -6,7 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import skillpoints.handler.*;
-import skillpoints.handler.xp.ArcheryCombatEventHandler;
+import skillpoints.handler.xp.*;
 
 @Mod(modid = SkillPointsMod.MODID, name = SkillPointsMod.NAME, version = SkillPointsMod.VERSION)
 public class SkillPointsMod {
@@ -28,9 +28,7 @@ public class SkillPointsMod {
             MinecraftForge.EVENT_BUS.register(new MeleeCombatEventHandler());
         }
 
-        if (Config.enableArcherySystem) {
-            MinecraftForge.EVENT_BUS.register(new ArcheryCombatEventHandler());
-        }
+		new ArcheryCombatEventHandler();
 
         if (Config.enableFishingSystem) {
             MinecraftForge.EVENT_BUS.register(new FishingEventHandler());
