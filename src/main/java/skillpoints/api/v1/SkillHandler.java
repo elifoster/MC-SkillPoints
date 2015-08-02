@@ -6,14 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.HashMap;
 import java.util.List;
 
-public interface SkillHandler {
-
-	/**
-	 * Name of the skill
-	 * @return name
-	 */
-	public String name();
-
+public interface SkillHandler extends General {
 	/**
 	 * List of perks that go with this skill
 	 * @return List of Perks
@@ -40,10 +33,4 @@ public interface SkillHandler {
 	 * @return list of new perks
 	 */
 	public List<Perk> newPerks(String group, Integer level);
-
-	/**
-	 * Saves the perks in this group to the player
-	 * @param player player to save perks of
-	 */
-	public void save(EntityPlayer player);
 }

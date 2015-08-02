@@ -67,9 +67,7 @@ public class ArcheryCombatEventHandler extends GeneralXPHandler {
 
 	@Override
 	public List<EventBus> buses() {
-		List<EventBus> buses = new ArrayList<EventBus>();
-		buses.add(MinecraftForge.EVENT_BUS);
-		return buses;
+		return forgeBus;
 	}
 
 	@Override
@@ -86,5 +84,11 @@ public class ArcheryCombatEventHandler extends GeneralXPHandler {
 	@Override
 	public String name() {
 		return "archery";
+	}
+
+	@Override
+	public String description() {
+		// TODO
+		return "";
 	}
 }

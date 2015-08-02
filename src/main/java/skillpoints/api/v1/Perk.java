@@ -2,19 +2,7 @@ package skillpoints.api.v1;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface Perk<T> {
-	/**
-	 * Get the name of the perk
-	 * @return name
-	 */
-	public String name();
-
-	/**
-	 * Get the description of the perk
-	 * @return description
-	 */
-	public String description();
-
+public interface Perk<T> extends General {
 	/**
 	 * Level needed for the perk
 	 * @return levelNeeded
@@ -47,10 +35,4 @@ public interface Perk<T> {
 	 * @return removal was successful
 	 */
 	public boolean remove(EntityPlayer player);
-
-	/**
-	 * Saves this perk to the player
-	 * @param player player to save perk of
-	 */
-	public void save(EntityPlayer player);
 }
