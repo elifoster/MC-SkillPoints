@@ -1,7 +1,9 @@
 # MC-SkillPoints
-A Minecraft mod that adds a skill tree system to the game. This mod is very based off of my experiences playing Skyrim and Fallout. This mod is currently in its theoretical stage. It will add a very easy to use and fully-featured API for easy mod compatbility, as well as quick development of new features. 
+A Minecraft mod that adds a skill and perk system to the game. This mod is very based off of my experiences playing Skyrim and Fallout. This mod is currently in its theoretical stage. It will add a very easy to use and fully-featured API for easy mod compatbility, as well as quick development of new features. 
 
 Shoutout to kingluke_ (bae) for helping me with ideas and names, and showing me Skyrim and Fallout.
+
+When complete, wiki will be available at the FTB Official Wiki/Gamepedia, at whatever name we decide to go with.
 
 # About
 ## Skills
@@ -31,7 +33,7 @@ The skill of using a fishing rod to find fish in water. Perks:
 * Better bait: Higher chance of a fish biting.
 * 2 fish 1 rod: 10% chance of catching 2x as many fish.
   * 3 fish 1 rod: 10% chance of catching 3x as many fish. (High level)
-* Quick cast: Fishing rods cast faster, but it takes longer for fish to bite.
+* Quick cast: Fishing rods cast faster
 * Treasure fishing: Small chance of getting random enchanted items and valueable materials (requires 25 looting), lowers chance of catching fish.
 
 ### Skill: Mining
