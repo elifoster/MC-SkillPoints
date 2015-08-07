@@ -1,52 +1,64 @@
 package skillpoints;
 
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Config {
+	public static Configuration config;
 
-    public static boolean enableArcherySystem;
-    public static boolean enableBlockingSystem;
-    public static boolean enableBrewingSystem;
-    public static boolean enableEnchantingSystem;
-    public static boolean enableFarmingSystem;
-    public static boolean enableFishingSystem;
-    public static boolean enableLootingSystem;
-    public static boolean enableMeleeSystem;
-    public static boolean enableMiningSystem;
-    public static boolean enableSmithingSystem;
-    public static boolean enableSpeechSystem;
+	public static boolean enableArcherySystem;
+	public static boolean enableBlockingSystem;
+	public static boolean enableBrewingSystem;
+	public static boolean enableEnchantingSystem;
+	public static boolean enableFarmingSystem;
+	public static boolean enableFishingSystem;
+	public static boolean enableLootingSystem;
+	public static boolean enableMeleeSystem;
+	public static boolean enableMiningSystem;
+	public static boolean enableSmithingSystem;
+	public static boolean enableSpeechSystem;
 
-    public static void load(FMLPreInitializationEvent event) {
-        File configurationDir = ReflectionHelper.getPrivateValue(FMLPreInitializationEvent.class, event, 2);
-        File oldConfigFile = new File(configurationDir, "skillpoints.cfg");
-        if (oldConfigFile.exists()) {
-            try {
-                FileUtils.copyFile(new File(configurationDir, "skillpoints.cfg"), new File(configurationDir, "skillpoints-try.cfg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            oldConfigFile.delete();
-        }
-        Configuration config = new Configuration(new File(configurationDir, "FlaxbeardsSteamPower.cfg"));
-        config.load();
+	// Categories
+	private static final String FEATURES = "Features";
 
-        // Enable systems
-        enableArcherySystem = config.get("Feature", "Enable archery system", true).getBoolean(true);
-        enableBlockingSystem = config.get("Feature", "Enable blocking system", true).getBoolean(true);
-        enableBrewingSystem = config.get("Feature", "Enable brewing system", true).getBoolean(true);
-        enableEnchantingSystem = config.get("Feature", "Enable enchanting system", true).getBoolean(true);
-        enableFarmingSystem = config.get("Feature", "Enable farming system", true).getBoolean(true);
-        enableFishingSystem = config.get("Feature", "Enable fishing system", true).getBoolean(true);
-        enableLootingSystem = config.get("Feature", "Enable looting system", true).getBoolean(true);
-        enableMeleeSystem = config.get("Feature", "Enable melee system", true).getBoolean(true);
-        enableMiningSystem = config.get("Feature", "Enable mining sytem", true).getBoolean(true);
-        enableSmithingSystem = config.get("Feature", "Enable smithing system", true).getBoolean(true);
-        enableSpeechSystem = config.get("Feature", "Enable speech system", true).getBoolean(true);
-    }
+	public static void init(File configFile) {
+		//create configuration object from the given file
+		if (config == null)
+		{
+			config = new Configuration(configFile);
+			loadConfig();
+		}
+	}
+
+	@SubscribeEvent
+	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+	{
+		if (event.modID.equalsIgnoreCase(SkillPointsMod.MODID))
+		{
+			loadConfig();
+		}
+	}
+
+	private static void loadConfig() {
+		enableArcherySystem = config.getBoolean("archerySystem", FEATURES, true, "Enable archery system");
+		enableBlockingSystem = config.getBoolean("blockingSystem", FEATURES, true, "Enable blocking system");
+		enableBrewingSystem = config.getBoolean("brewingSystem", FEATURES, true, "Enable brewing system");
+		enableEnchantingSystem = config.getBoolean("enchantingSystem", FEATURES, true, "Enable enchanting system");
+		enableFarmingSystem = config.getBoolean("farmingSystem", FEATURES, true, "Enable farming system");
+		enableFishingSystem = config.getBoolean("fishingSystem", FEATURES, true, "Enable fishing system");
+		enableLootingSystem = config.getBoolean("lootingSystem", FEATURES, true, "Enable looting system");
+		enableMeleeSystem = config.getBoolean("meleeSystem", FEATURES, true, "Enable melee system");
+		enableMiningSystem = config.getBoolean("miningSystem", FEATURES, true, "Enable mining system");
+		enableSmithingSystem = config.getBoolean("smithingSystem", FEATURES, true, "Enable smithing system");
+		enableSpeechSystem = config.getBoolean("speechSystem", FEATURES, true, "Enable speech system");
+
+
+		if (config.hasChanged())
+		{
+			config.save();
+		}
+	}
 }

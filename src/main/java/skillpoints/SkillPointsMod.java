@@ -1,5 +1,6 @@
 package skillpoints;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -7,20 +8,22 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import skillpoints.api.API;
 import skillpoints.api.APIBase;
+import skillpoints.api.APIStatus;
 import skillpoints.api.v1.APIv1;
 import skillpoints.apiimpl.APISelector;
-import skillpoints.handler.BlockEventHandler;
-import skillpoints.handler.BrewingEventHandler;
-import skillpoints.handler.EnchantingEventHandler;
-import skillpoints.handler.FarmingEventHandler;
-import skillpoints.handler.FishingEventHandler;
-import skillpoints.handler.GlobalSkillsEventHandler;
-import skillpoints.handler.LootingEventHandler;
-import skillpoints.handler.MeleeCombatEventHandler;
-import skillpoints.handler.MiningEventHandler;
-import skillpoints.handler.SmithingEventHandler;
-import skillpoints.handler.SpeechEventHandler;
+import skillpoints.handler.WorldShutdownHandler;
+import skillpoints.handler.xp.BlockEventHandler;
+import skillpoints.handler.xp.BrewingEventHandler;
+import skillpoints.handler.xp.EnchantingEventHandler;
+import skillpoints.handler.xp.FarmingEventHandler;
+import skillpoints.handler.xp.FishingEventHandler;
+import skillpoints.handler.xp.LootingEventHandler;
+import skillpoints.handler.xp.MeleeCombatEventHandler;
+import skillpoints.handler.xp.MiningEventHandler;
+import skillpoints.handler.xp.SmithingEventHandler;
+import skillpoints.handler.xp.SpeechEventHandler;
 import skillpoints.handler.xp.ArcheryCombatEventHandler;
+import skillpoints.util.Logger;
 
 @Mod(modid = SkillPointsMod.MODID, name = SkillPointsMod.NAME, version = SkillPointsMod.VERSION)
 public class SkillPointsMod {
@@ -32,62 +35,41 @@ public class SkillPointsMod {
 
 	public static APIv1 getAPI() {
 		try {
-			return (APIv1) API.getAPI(1);
+			APIBase api = API.getAPI(1);
+			if (api.getStatus() == APIStatus.OK && api.getVersion() == 1)
+				return (APIv1) api;
+			else {
+				ClassCastException c = new ClassCastException();
+				c.fillInStackTrace();
+				throw c;
+			}
 		} catch (ClassCastException e) {
-			System.out.println("The Skill Points API is broken");
+			Logger.error("The Skill Points API is broken");
 			throw e;
 		}
 	}
 
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Config.load(event);
+        Config.init(event.getSuggestedConfigurationFile());
+		FMLCommonHandler.instance().bus().register(new Config());
 		APISelector.init();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new GlobalSkillsEventHandler());
-        if (Config.enableMeleeSystem) {
-            MinecraftForge.EVENT_BUS.register(new MeleeCombatEventHandler());
-        }
+		MinecraftForge.EVENT_BUS.register(new WorldShutdownHandler());
 
+        new MeleeCombatEventHandler();
 		new ArcheryCombatEventHandler();
-
-        if (Config.enableFishingSystem) {
-            MinecraftForge.EVENT_BUS.register(new FishingEventHandler());
-        }
-
-        if (Config.enableMiningSystem) {
-            MinecraftForge.EVENT_BUS.register(new MiningEventHandler());
-        }
-
-        if (Config.enableEnchantingSystem) {
-            MinecraftForge.EVENT_BUS.register(new EnchantingEventHandler());
-        }
-
-        if (Config.enableSmithingSystem) {
-            MinecraftForge.EVENT_BUS.register(new SmithingEventHandler());
-        }
-
-        if (Config.enableFarmingSystem) {
-            MinecraftForge.EVENT_BUS.register(new FarmingEventHandler());
-        }
-
-        if (Config.enableLootingSystem) {
-            MinecraftForge.EVENT_BUS.register(new LootingEventHandler());
-        }
-
-        if (Config.enableSpeechSystem) {
-            MinecraftForge.EVENT_BUS.register(new SpeechEventHandler());
-        }
-
-        if (Config.enableBrewingSystem) {
-            MinecraftForge.EVENT_BUS.register(new BrewingEventHandler());
-        }
-
-        if (Config.enableBlockingSystem) {
-            MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
-        }
+        new FishingEventHandler();
+        new MiningEventHandler();
+        new EnchantingEventHandler();
+        new SmithingEventHandler();
+        new FarmingEventHandler();
+        new LootingEventHandler();
+        new SpeechEventHandler();
+        new BrewingEventHandler();
+        new BlockEventHandler();
     }
 }

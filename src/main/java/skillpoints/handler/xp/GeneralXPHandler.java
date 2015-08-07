@@ -2,13 +2,21 @@ package skillpoints.handler.xp;
 
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import skillpoints.SkillPointsMod;
 import skillpoints.api.v1.XPHandler;
 import skillpoints.util.IterableUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GeneralXPHandler implements XPHandler {
+	protected static final List<EventBus> empty = new ArrayList<EventBus>();
+	protected static final List<EventBus> forgeBus = new ArrayList<EventBus>();
+	static {
+		forgeBus.add(MinecraftForge.EVENT_BUS);
+	}
+
 	public GeneralXPHandler() {
 		if (enabled()) {
 			SkillPointsMod.getAPI().addXPHandler(this);
@@ -24,12 +32,16 @@ public abstract class GeneralXPHandler implements XPHandler {
 
 	public void addXP(EntityPlayer player, int amount) {
 		int xp = xp(player);
-		player.getEntityData().setInteger(name() + SkillPointsMod.XP_DATA + SkillPointsMod.MODID, xp + amount);
+		setXP(player, xp + amount);
 	}
 
 	public void removeXP(EntityPlayer player, int amount) {
 		int xp = xp(player);
-		player.getEntityData().setInteger(name() + SkillPointsMod.XP_DATA + SkillPointsMod.MODID, xp - amount);
+		setXP(player, xp - amount);
+	}
+
+	private void setXP(EntityPlayer player, int amount) {
+		player.getEntityData().setInteger(name() + SkillPointsMod.XP_DATA + SkillPointsMod.MODID, amount);
 	}
 
 	@Override

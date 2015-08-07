@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Strikingwolf
  */
-public class APIimplv1 implements APIv1 {
+public class APIHandlerV1 implements APIv1 {
 	protected final int version;
 	protected final APIStatus status;
 
@@ -26,7 +26,7 @@ public class APIimplv1 implements APIv1 {
 	protected ArrayList<SkillHandler> skillHandlers = new ArrayList<SkillHandler>();
 	protected HashMap<String, SkillHandler> skillHandlersHash = new HashMap<String, SkillHandler>();
 
-	public APIimplv1(int version, APIStatus status) {
+	public APIHandlerV1(int version, APIStatus status) {
 		this.version = version;
 		this.status = status;
 	}
@@ -57,23 +57,10 @@ public class APIimplv1 implements APIv1 {
 	}
 
 	@Override
-	public void addXPHandler(int idx, XPHandler xpHandler) {
-		xpHandlersHash.put(xpHandler.name(), xpHandler);
-		xpHandlers.add(idx, xpHandler);
-	}
-
-	@Override
 	public boolean addSkillHandler(SkillHandler skillHandler) {
 		skillHandlersHash.put(skillHandler.name(), skillHandler);
 		IterableUtil.registerAll(skillHandler.buses(), skillHandler);
 		return skillHandlers.add(skillHandler);
-	}
-
-	@Override
-	public void addSkillHandler(int idx, SkillHandler skillHandler) {
-		skillHandlersHash.put(skillHandler.name(), skillHandler);
-		IterableUtil.registerAll(skillHandler.buses(), skillHandler);
-		skillHandlers.add(idx, skillHandler);
 	}
 
 	@Override
@@ -159,14 +146,13 @@ public class APIimplv1 implements APIv1 {
 	}
 
 	@Override
-	public XPHandler getXPHandler(int idx) {
-		return xpHandlers.get(idx);
+	public List<XPHandler> xpHandlers() {
+		return xpHandlers;
 	}
 
-
 	@Override
-	public SkillHandler getSkillHandler(int idx) {
-		return skillHandlers.get(idx);
+	public List<SkillHandler> skillHandlers() {
+		return skillHandlers;
 	}
 
 	@Override
