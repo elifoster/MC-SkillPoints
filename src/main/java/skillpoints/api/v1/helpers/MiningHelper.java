@@ -34,8 +34,8 @@ public class MiningHelper {
     }
 
     /**
-     * @param orePartialName The OreDict name, or part of the OreDict name that is tested against
-     * @param smeltedStack The item being smelted
+     * @param orePartialName the OreDict name, or part of the OreDict name that is tested against
+     * @param smeltedStack the item being smelted
      * @return true if everything that is required to execute is true, else false
      */
     public static boolean isAbleToExecuteSmelting(String orePartialName, ItemStack smeltedStack) {
@@ -51,15 +51,15 @@ public class MiningHelper {
     }
 
     /**
-     * @param orePartialName
-     * @param block
-     * @return
+     * @param orePartialName the OreDict name, or part of the OreDict name that is tested against
+     * @param stack the ItemStack being tested against
+     * @return true if block is in the oredict entry containing orePartialName
      */
-    public static boolean isBlockInOreDict(String orePartialName, ItemStack block) {
+    public static boolean isBlockInOreDict(String orePartialName, ItemStack stack) {
         for (int i = 0; i < OreDictionary.getOreNames().length; i++) {
             if (OreDictionary.getOreNames()[i].contains(orePartialName)) {
                 String name = OreDictionary.getOreName(i);
-                if (OreDictionary.getOres(name).contains(block)) {
+                if (OreDictionary.getOres(name).contains(stack)) {
                     return true;
                 }
             }
