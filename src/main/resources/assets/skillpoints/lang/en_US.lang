@@ -1,0 +1,18 @@
+perk.mining.diamondminer.name=Diamond Miner
+perk.mining.fortuneminer.name=Fortune Miner
+perk.mining.xpfarmer.name=XP Farmer
+
+perk.melee.strongarm.name=Strongarm
+
+perk.smithing.delicatetouch.name=Delicate Touch
+perk.smithing.strongermetals.name=Stronger Metals
+
+
+perk.mining.diamondminer.description=2x diamond drops, but 2x durability use
+perk.mining.fortuneminer.description=Small chance of getting extra materials from mining, except diamonds
+perk.mining.xpfarmer.description=Get more xp when mining ores
+
+perk.melee.strongarm.description=Attacks with melee weapons do +5 more damage.
+
+perk.smithing.delicatetouch.description=Smithing damages the Anvil less based on Smithing level
+perk.smithing.strongermetals.description=Materials repair 5% more

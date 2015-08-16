@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import skillpoints.api.v1.Perk;
@@ -55,14 +56,12 @@ public class FortuneMiner implements Perk<BlockEvent.BreakEvent> {
 
     @Override
     public String name() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.fortuneminer.name");
     }
 
     @Override
     public String description() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.fortuneminer.description");
     }
 
     @Override

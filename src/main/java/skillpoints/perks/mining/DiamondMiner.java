@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import skillpoints.api.v1.Perk;
@@ -16,8 +17,7 @@ public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
 
     @Override
     public int levelNeeded() {
-        //TODO
-        return 0;
+       return 75;
     }
 
     @Override
@@ -34,6 +34,9 @@ public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
                 quantity += quantity;
 
                 EntityItem entityItem = new EntityItem(event.world, event.x, event.y, event.z, stackItem);
+
+                int damage = event.getPlayer().getHeldItem().getItemDamage();
+                event.getPlayer().getHeldItem().setItemDamage(damage - 2);
 
                 for (int i = 0; i < quantity; i++) {
                     event.world.spawnEntityInWorld(entityItem);
@@ -62,14 +65,12 @@ public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
 
     @Override
     public String name() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.diamondminer.name");
     }
 
     @Override
     public String description() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.diamondminer.description");
     }
 
     @Override

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import skillpoints.api.v1.Perk;
 
@@ -11,20 +12,17 @@ public class Strongarm implements Perk<AttackEntityEvent> {
 
 	@Override
 	public String name() {
-		//TODO
-		return null;
+		return StatCollector.translateToLocal("perk.melee.strongarm.name");
 	}
 
 	@Override
 	public String description() {
-		//TODO
-		return null;
+		return StatCollector.translateToLocal("perk.melee.strongarm.description");
 	}
 
 	@Override
 	public int levelNeeded() {
-		// TODO, decide Exp amounts
-		return 0;
+		return 20;
 	}
 
 	@Override

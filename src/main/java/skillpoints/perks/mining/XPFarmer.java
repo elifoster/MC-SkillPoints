@@ -3,6 +3,7 @@ package skillpoints.perks.mining;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.world.BlockEvent;
 import skillpoints.api.v1.Perk;
 import skillpoints.api.v1.helpers.MiningHelper;
@@ -48,14 +49,12 @@ public class XPFarmer implements Perk<BlockEvent.BreakEvent> {
 
     @Override
     public String name() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.xpfarmer.name");
     }
 
     @Override
     public String description() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.mining.xpfarmer.description");
     }
 
     @Override

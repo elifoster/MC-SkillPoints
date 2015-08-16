@@ -1,6 +1,7 @@
 package skillpoints.perks.smithing;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import skillpoints.api.v1.Perk;
 
@@ -8,14 +9,12 @@ public class StrongerMetals implements Perk<AnvilRepairEvent> {
 
     @Override
     public String name() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.smithing.strongermetals.name");
     }
 
     @Override
     public String description() {
-        //TODO
-        return null;
+        return StatCollector.translateToLocal("perk.smithing.strongermetals.description");
     }
 
     @Override
