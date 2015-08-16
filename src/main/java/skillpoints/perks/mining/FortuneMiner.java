@@ -25,7 +25,7 @@ public class FortuneMiner implements Perk<BlockEvent.BreakEvent> {
         ItemStack blockStack = new ItemStack(event.block, event.blockMetadata);
         Block block = event.block;
 
-        if (MiningHelper.isAbleToExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
+        if (MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
           xpDropped > 0 && has(event.getPlayer())) {
             ItemStack stackItem = new ItemStack(event.block.getItemDropped(event.blockMetadata, new Random(), 0));
             if (!(OreDictionary.getOres("gemDiamond").contains(stackItem))) {

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import skillpoints.Config;
 import skillpoints.api.v1.helpers.MiningHelper;
+import skillpoints.api.v1.helpers.MiscHelper;
 
 import java.util.List;
 
@@ -20,14 +21,14 @@ public class MiningEventHandler extends GeneralXPHandler {
 		Block block = event.block;
 
         if (xpDropped > 0 &&
-		  MiningHelper.isAbleToExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer())) {
+		  MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer())) {
 			addXP(event.getPlayer(), 5);
         }
     }
 
     @SubscribeEvent
     public void onItemSmelted(PlayerEvent.ItemSmeltedEvent event) {
-        if (MiningHelper.isAbleToExecuteSmelting("ore", event.smelting)) {
+        if (MiscHelper.isStackInOreDict("ore", event.smelting)) {
 			addXP(event.player, 5);
 		}
     }

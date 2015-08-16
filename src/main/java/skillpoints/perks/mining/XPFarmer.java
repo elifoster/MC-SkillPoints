@@ -21,7 +21,7 @@ public class XPFarmer implements Perk<BlockEvent.BreakEvent> {
         ItemStack blockStack = new ItemStack(event.block, event.blockMetadata);
         Block block = event.block;
 
-        if (xpDropped > 0 && MiningHelper.isAbleToExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
+        if (xpDropped > 0 && MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
           has(event.getPlayer())) {
             int newXPValue = xpDropped + (xpDropped / 2);
             event.setExpToDrop(newXPValue);

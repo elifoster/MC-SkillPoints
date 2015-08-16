@@ -8,6 +8,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import skillpoints.api.v1.Perk;
 import skillpoints.api.v1.helpers.MiningHelper;
+import skillpoints.api.v1.helpers.MiscHelper;
 
 import java.util.Random;
 
@@ -25,8 +26,8 @@ public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
         ItemStack blockStack = new ItemStack(event.block, event.blockMetadata);
         Block block = event.block;
 
-        if (xpDropped > 0 && MiningHelper.isAbleToExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
-          has(event.getPlayer()) && MiningHelper.isBlockInOreDict("oreDiamond", blockStack)) {
+        if (xpDropped > 0 && MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
+          has(event.getPlayer()) && MiscHelper.isStackInOreDict("oreDiamond", blockStack)) {
             ItemStack stackItem = new ItemStack(event.block.getItemDropped(event.blockMetadata, new Random(), 0));
             if (OreDictionary.getOres("gemDiamond").contains(stackItem)) {
                 int quantity = block.quantityDroppedWithBonus(event.blockMetadata, new Random());
