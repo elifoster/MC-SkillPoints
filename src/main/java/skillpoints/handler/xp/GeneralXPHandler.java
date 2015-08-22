@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import skillpoints.SkillPointsMod;
 import skillpoints.api.v1.XPHandler;
 import skillpoints.util.IterableUtil;
+import skillpoints.util.MathUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public abstract class GeneralXPHandler implements XPHandler {
 
 	@Override
 	public int level(EntityPlayer player) {
-		return Math.floorDiv(xp(player), levelReset());
+		return MathUtil.floorDiv(xp(player), levelReset());
 	}
 
 	@Override
