@@ -17,7 +17,9 @@ public class SkillsRef {
 
 	private static ArrayList<Perk<AttackEntityEvent>> melee = new ArrayList<Perk<AttackEntityEvent>>();
 	private static ArrayList<Perk<AnvilRepairEvent>> smithing = new ArrayList<Perk<AnvilRepairEvent>>();
-	private static ArrayList<Perk<BlockEvent.BreakEvent>> mining = new ArrayList<Perk<BlockEvent.BreakEvent>>();
+	private static ArrayList<Perk<BlockEvent.BreakEvent>> miningBreak = new ArrayList<Perk<BlockEvent.BreakEvent>>();
+	private static ArrayList<Perk<BlockEvent.HarvestDropsEvent>> miningHarvest = new ArrayList<Perk<BlockEvent.HarvestDropsEvent>>();
+	//TODO figure out how to combine perk sets with differing events used
 
 	public static ArrayList<Perk<AttackEntityEvent>> getMelee() {
 		return melee;
@@ -25,6 +27,14 @@ public class SkillsRef {
 
 	public static ArrayList<Perk<AnvilRepairEvent>> getSmithing() {
 		return smithing;
+	}
+
+	public static ArrayList<Perk<BlockEvent.BreakEvent>> getMiningBreak() {
+		return miningBreak;
+	}
+
+	public static ArrayList<Perk<BlockEvent.HarvestDropsEvent>> getMiningHarvest() {
+		return miningHarvest;
 	}
 
 	static {
@@ -36,8 +46,8 @@ public class SkillsRef {
 		smithing.add(new DelicateTouch());
 
 		//Mining
-		mining.add(new XPFarmer());
-		mining.add(new FortuneMiner());
-		mining.add(new DiamondMiner());
+		miningBreak.add(new XPFarmer());
+		miningHarvest.add(new FortuneMiner());
+		miningHarvest.add(new DiamondMiner());
 	}
 }

@@ -11,9 +11,7 @@ import skillpoints.api.v1.Perk;
 import skillpoints.api.v1.helpers.MiningHelper;
 import skillpoints.api.v1.helpers.MiscHelper;
 
-import java.util.Random;
-
-public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
+public class DiamondMiner implements Perk<BlockEvent.HarvestDropsEvent> {
 
     @Override
     public int levelNeeded() {
@@ -21,25 +19,20 @@ public class DiamondMiner implements Perk<BlockEvent.BreakEvent> {
     }
 
     @Override
-    public void execute(BlockEvent.BreakEvent event) {
-        int xpDropped = event.getExpToDrop();
+    public void execute(BlockEvent.HarvestDropsEvent event) {
         ItemStack blockStack = new ItemStack(event.block, event.blockMetadata);
         Block block = event.block;
 
-        if (xpDropped > 0 && MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.getPlayer()) &&
-          has(event.getPlayer()) && MiscHelper.isStackInOreDict("oreDiamond", blockStack)) {
-            ItemStack stackItem = new ItemStack(event.block.getItemDropped(event.blockMetadata, new Random(), 0));
-            if (OreDictionary.getOres("gemDiamond").contains(stackItem)) {
-                int quantity = block.quantityDroppedWithBonus(event.blockMetadata, new Random());
-                quantity += quantity;
+        if (event.dropChance > 0.0F && event.harvester != null && event.harvester instanceof EntityPlayer &&
+          MiningHelper.canExecuteMining(block, blockStack, event.blockMetadata, event.harvester) &&
+          has(event.harvester) && MiscHelper.isStackInOreDict("oreDiamond", blockStack) && !event.isSilkTouching) {
+            for (ItemStack i : event.drops) {
+                if (OreDictionary.getOres("gemDiamond").contains(i)) {
+                    int random = (int) (Math.random() * 5 + 1);
+                    event.drops.add(random, i);
 
-                EntityItem entityItem = new EntityItem(event.world, event.x, event.y, event.z, stackItem);
-
-                int damage = event.getPlayer().getHeldItem().getItemDamage();
-                event.getPlayer().getHeldItem().setItemDamage(damage - 2);
-
-                for (int i = 0; i < quantity; i++) {
-                    event.world.spawnEntityInWorld(entityItem);
+                    int damage = event.harvester.getHeldItem().getItemDamage();
+                    event.harvester.getHeldItem().setItemDamage(damage - 2);
                 }
             }
         }

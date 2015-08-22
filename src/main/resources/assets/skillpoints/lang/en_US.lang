@@ -16,3 +16,7 @@ perk.melee.strongarm.description=Attacks with melee weapons do +5 more damage.
 
 perk.smithing.delicatetouch.description=Smithing damages the Anvil less based on Smithing level
 perk.smithing.strongermetals.description=Materials repair 5% more
+
+
+message.levelupglobal=%s has leveled up in the %s group! The following perks are now available to them:
+message.levelupclient=You have leveled up in the %s group! The following perks are now available to you:

@@ -19,7 +19,7 @@ public class MiningHelper {
      * @return true if everything that is required to execute is true, else false
      */
     public static boolean canExecuteMining(Block block, ItemStack blockStack, int meta, EntityPlayer player) {
-        if (block.canHarvestBlock(player, meta) && player.getHeldItem() != null &&
+        if (player != null && block.canHarvestBlock(player, meta) && player.getHeldItem() != null &&
           player.getHeldItem().getItem() instanceof ItemPickaxe) {
             return MiscHelper.isStackInOreDict("ore", blockStack);
         }

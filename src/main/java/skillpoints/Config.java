@@ -21,8 +21,11 @@ public class Config {
 	public static boolean enableSmithingSystem;
 	public static boolean enableSpeechSystem;
 
+	public static boolean enableGlobalLevelupNotifications;
+
 	// Categories
 	private static final String FEATURES = "Features";
+	private static final String TWEAKS = "Tweaks";
 
 	public static void init(File configFile) {
 		//create configuration object from the given file
@@ -54,6 +57,7 @@ public class Config {
 		enableMiningSystem = config.getBoolean("miningSystem", FEATURES, true, "Enable mining system");
 		enableSmithingSystem = config.getBoolean("smithingSystem", FEATURES, true, "Enable smithing system");
 		enableSpeechSystem = config.getBoolean("speechSystem", FEATURES, true, "Enable speech system");
+		enableGlobalLevelupNotifications = config.getBoolean("globalLevelupNotifications", TWEAKS, true, "Enable global level up notifications");
 
 
 		if (config.hasChanged())

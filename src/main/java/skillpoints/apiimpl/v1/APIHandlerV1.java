@@ -1,6 +1,11 @@
 package skillpoints.apiimpl.v1;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import skillpoints.Config;
 import skillpoints.api.API;
 import skillpoints.api.APIBase;
 import skillpoints.api.APIStatus;
@@ -14,9 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @author Strikingwolf
- */
 public class APIHandlerV1 implements APIv1 {
 	protected final int version;
 	protected final APIStatus status;
@@ -126,14 +128,12 @@ public class APIHandlerV1 implements APIv1 {
 				perks.put(name, before);
 			}
 		}
-
 		return perks;
 	}
 
 	@Override
 	public void levelUp(EntityPlayer player, XPHandler xpHandler) {
-		// TODO add a config option for global or not
-		String toSend = player.getDisplayName() + " has leveled up in xp group " + xpHandler.name() + " and has earned the following perks";
+		String toSend = "";
 		HashMap<String, List<Perk>> theNewPerks = newPerks(player, xpHandler);
 		for (String name : theNewPerks.keySet()) {
 			List<Perk> perks = theNewPerks.get(name);
@@ -142,7 +142,21 @@ public class APIHandlerV1 implements APIv1 {
 				toSend += "\n- " + perk.name();
 			}
 		}
-		// TODO actually send the toSend variable to the player
+
+		if (Config.enableGlobalLevelupNotifications) {
+			World world = player.getEntityWorld();
+			for (EntityPlayer ePlayer : (List<EntityPlayer>) world.playerEntities) {
+				if (ePlayer.getUniqueID() != player.getUniqueID()) {
+					ePlayer.addChatMessage(new ChatComponentTranslation("message.levelupglobal", new Object[]{player.getDisplayName(), xpHandler.name()}));
+					ePlayer.addChatMessage(new ChatComponentText(toSend));
+				}
+			}
+		}
+
+		player.addChatMessage(new ChatComponentTranslation("message.levelupclient", new Object[] {xpHandler.name()}));
+		player.addChatMessage(new ChatComponentText(toSend));
+
+		//TODO: Figure out a way to use ChatComponentTranslation with toSend
 	}
 
 	@Override
